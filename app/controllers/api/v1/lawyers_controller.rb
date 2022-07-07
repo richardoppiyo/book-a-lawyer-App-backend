@@ -1,13 +1,12 @@
-class Api.v1::LawyersController < ApplicationController
+class Api::V1::LawyersController < ApplicationController
   def index
-    @lawyer = Lawyer.all
-    render json: { lawyer: @lawyer }
+    lawyer = Lawyer.all
+    render json: { lawyer: }
   end
 
   def create
-    @current_user = current_user
-    @lawyer = current_user.Lawyer.new(lawyer_params)
-    if @lawyer.save
+    lawyer = Lawyer.new(lawyer_params)
+    if lawyer.save
       render json: { result: 'Lawyer created successfully' }
     else
       render json: { result: 'Something went wrong' }, status: :unprocessable_entity
@@ -15,9 +14,8 @@ class Api.v1::LawyersController < ApplicationController
   end
 
   def update
-    @current_user = current_user
-    @lawyer = current_user.Lawyer.new.find(params[:id])
-    if @lawyer.update(lawyer_params)
+    lawyer = current_user.Lawyer.new.find(params[:id])
+    if lawyer.update(lawyer_params)
       render json: { result: 'Lawyer updated successfully' }
     else
       render json: { result: 'Something went wrong' }, status: :unprocessable_entity
@@ -25,14 +23,13 @@ class Api.v1::LawyersController < ApplicationController
   end
 
   def show
-    @lawyer = Lawyer.find(params[:id])
-    render json: { lawyer: @lawyer }
+    lawyer = Lawyer.find(params[:id])
+    render json: { lawyer: }
   end
 
   def destroy
-    @current_user = current_user
-    @lawyer = current_user.Lawyer.new.find(params[:id])
-    @lawyer.destroy
+    lawyer = current_user.Lawyer.new.find(params[:id])
+    lawyer.destroy
     render json: { result: 'Lawyer removed successfully' }
   end
 
