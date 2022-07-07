@@ -19,7 +19,6 @@ class UsersController < ApplicationController
     else
       render json: { result: 'Something went wrong' }, status: :unprocessable_entity
     end
-    
   end
 
   def destroy

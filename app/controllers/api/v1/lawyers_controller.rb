@@ -2,11 +2,11 @@ class LawyersController < ApplicationController
   def index
     @lawyer = Lawyer.all
     render json: { lawyer: @lawyer }
-   end
+  end
 
   def create
     @current_user = current_user
-    @lawyer = current_user.Lawyer.new(lawyer_params)    
+    @lawyer = current_user.Lawyer.new(lawyer_params)
     if @lawyer.save
       render json: { result: 'Lawyer created successfully' }
     else
