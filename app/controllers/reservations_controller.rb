@@ -1,25 +1,26 @@
 class ReservationsController < ApplicationController
     def index
-        @reservation = Reservation.all
+        @current_user = current_user
+        @reservation = current_user.Reservation.all
     end
 
     def create
         @reservation = Reservation.new(reservation_params)
         @reservation.save
-        redirect_to inventory_path(@inventory_food.inventory)
+        redirect_to reservations_path
     end
     
       def update
         @reservation = Reservation.new.find(params[:id])
-        @reservation.update(inventory_food_params)
-        redirect_to inventory_path(@inventory_food.inventory)
+        @reservation.update(reservation_params)
+        redirect_to reservations_path
       end
     
     
       def destroy
         @reservation = Reservation.new.find(params[:id])
         @reservation.destroy
-        redirect_to inventory_path(@inventory_food.inventory)
+        redirect_to reservations_path
       end
     
       private
