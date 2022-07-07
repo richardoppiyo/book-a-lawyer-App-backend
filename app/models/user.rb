@@ -7,6 +7,6 @@ class User < ApplicationRecord
   has_many :reservations, dependent: :destroy
 
   validates_associated :reservations
-  validates :name, presence: true, length: {maximum: 50}
-  validates :phone, presence: true, length: {maximum: 15}, numericality: { only_integer: true }
+  validates :name, presence: true, length: { maximum: 50 }
+  validates :phone, presence: true, length: { maximum: 15 }, numericality: { only_integer: true }
 end
