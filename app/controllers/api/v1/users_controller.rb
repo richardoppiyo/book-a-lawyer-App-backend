@@ -1,10 +1,9 @@
-class Api.v1::UsersController < ApplicationController
+class Api::V11::UsersController < ApplicationController
   def index; end
 
   def create
-    @current_user = current_user
-    @user = current_user.User.new(user_params)
-    if @user.save
+    user = User.new(user_params)
+    if user.save
       render json: { result: 'User Created successful' }
     else
       render json: { result: 'Something went wrong' }, status: :unprocessable_entity
@@ -12,9 +11,8 @@ class Api.v1::UsersController < ApplicationController
   end
 
   def update
-    @current_user = current_user
-    @user = current_user.User.new.find(params[:id])
-    if @user.update(user_params)
+    user = current_user.User.new.find(params[:id])
+    if user.update(user_params)
       render json: { result: 'User updated successfully' }
     else
       render json: { result: 'Something went wrong' }, status: :unprocessable_entity
@@ -22,9 +20,8 @@ class Api.v1::UsersController < ApplicationController
   end
 
   def destroy
-    @current_user = current_user
-    @user = current_user.User.new.find(params[:id])
-    @user.destroy
+    user = current_user.User.new.find(params[:id])
+    user.destroy
     render json: { result: 'User deleted successfully' }
   end
 
