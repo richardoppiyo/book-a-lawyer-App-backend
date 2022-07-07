@@ -1,25 +1,31 @@
 class LawyersController < ApplicationController
     def index
-        @reservation = Reservation.all
+        @lawyer = Lawyer.all
     end
 
     def create
-        @lawyer = Reservation.new(lawyer_params)
+        @current_user = current_user
+        @lawyer = current_user.Lawyer.new(lawyer_params)
         @lawyer.save
-        redirect_to inventory_path(@inventory_food.inventory)
+        redirect_to lawyers_path
     end
     
       def update
-        @lawyer = Reservation.new.find(params[:id])
-        @lawyer.update(inventory_food_params)
-        redirect_to inventory_path(@inventory_food.inventory)
+        @current_user = current_user
+        @lawyer = current_user.Lawyer.new.find(params[:id])
+        @lawyer.update(lawyer_params)
+        redirect_to lawyers_path
       end
     
+      def show
+        @lawyer = Lawyer.find(params[:id])
+      end
     
       def destroy
-        @lawyer = Reservation.new.find(params[:id])
+        @current_user = current_user
+        @lawyer = current_user.Lawyer.new.find(params[:id])
         @lawyer.destroy
-        redirect_to inventory_path(@inventory_food.inventory)
+        redirect_to lawyers_path
       end
     
       private
