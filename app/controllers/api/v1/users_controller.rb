@@ -1,4 +1,4 @@
-class Api::v1::UsersController < ApplicationController
+class Api.v1::UsersController < ApplicationController
   def index; end
 
   def create

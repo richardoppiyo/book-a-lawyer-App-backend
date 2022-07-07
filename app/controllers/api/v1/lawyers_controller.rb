@@ -1,4 +1,4 @@
-class Api::v1::LawyersController < ApplicationController
+class Api.v1::LawyersController < ApplicationController
   def index
     @lawyer = Lawyer.all
     render json: { lawyer: @lawyer }

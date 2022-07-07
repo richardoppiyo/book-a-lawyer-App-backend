@@ -1,4 +1,4 @@
-class Api::v1::ReservationsController < ApplicationController
+class Api.v1::ReservationsController < ApplicationController
   def index
     @current_user = current_user
     @reservation = current_user.Reservation.all
