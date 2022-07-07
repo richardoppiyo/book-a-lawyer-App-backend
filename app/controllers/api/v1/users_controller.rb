@@ -4,20 +4,29 @@ class UsersController < ApplicationController
   def create
     @current_user = current_user
     @user = current_user.User.new(user_params)
-    @user.save
+    if @user.save
+      render json: { result: 'User Created successful' }
+    else
+      render json: { result: 'Something went wrong' }, status: :unprocessable_entity
+    end
   end
 
   def update
     @current_user = current_user
     @user = current_user.User.new.find(params[:id])
-    @user.update(inventory_food_params)
+    if @user.update(user_params)
+      render json: { result: 'User updated successfully' }
+    else
+      render json: { result: 'Something went wrong' }, status: :unprocessable_entity
+    end
+    
   end
 
   def destroy
     @current_user = current_user
     @user = current_user.User.new.find(params[:id])
     @user.destroy
-    redirect_to inventory_path(@inventory_food.inventory)
+    render json: { result: 'User deleted successfully' }
   end
 
   private
