@@ -1,13 +1,12 @@
-class Api.v1::ReservationsController < ApplicationController
+class Api::V1::ReservationsController < ApplicationController
   def index
-    @current_user = current_user
-    @reservation = current_user.Reservation.all
-    render json: { reservation: @reservation }
+    reservation = Reservation.all
+    render json: { reservation: }
   end
 
   def create
-    @reservation = Reservation.new(reservation_params)
-    if @reservation.save
+    reservation = Reservation.new(reservation_params)
+    if reservation.save
       render json: { result: 'Reservation successful' }
     else
       render json: { result: 'Something went wrong' }, status: :unprocessable_entity
@@ -15,8 +14,8 @@ class Api.v1::ReservationsController < ApplicationController
   end
 
   def update
-    @reservation = Reservation.new.find(params[:id])
-    if @reservation.update(reservation_params)
+    reservation = Reservation.new.find(params[:id])
+    if reservation.update(reservation_params)
       render json: { result: 'Reservation updated successfully' }
     else
       render json: { result: 'Something went wrong' }, status: :unprocessable_entity
@@ -24,8 +23,8 @@ class Api.v1::ReservationsController < ApplicationController
   end
 
   def destroy
-    @reservation = Reservation.new.find(params[:id])
-    @reservation.destroy
+    reservation = Reservation.new.find(params[:id])
+    reservation.destroy
     render json: { result: 'Reservation cancelled successfully' }
   end
 
