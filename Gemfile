@@ -12,6 +12,8 @@ gem 'file_validators'
 
 gem 'bullet', group: 'development'
 
+gem 'devise-jwt'
+
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
 
