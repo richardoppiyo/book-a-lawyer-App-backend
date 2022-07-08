@@ -28,4 +28,9 @@ class RegistrationsController < Devise::RegistrationsController
       render json: { result: 'failed', error: resource.errors }, status: :unprocessable_entity
     end
   end
+
+  def destroy
+    resource.destroy
+    render json: { result: 'success' }
+  end
 end
