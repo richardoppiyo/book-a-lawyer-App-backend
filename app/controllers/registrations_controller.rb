@@ -15,4 +15,17 @@ class RegistrationsController < Devise::RegistrationsController
       render json: { result: 'failed', error: resource.errors }, status: :unprocessable_entity
     end
   end
+
+  def update
+    self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
+
+    resource_updated = update_resource(resource, account_update_params.except(:remove_avatar))
+    if resource_updated
+      current_user.avatar.purge if account_update_params[:remove_avatar]
+
+      render json: { result: 'success', user: resource }
+    else
+      render json: { result: 'failed', error: resource.errors }, status: :unprocessable_entity
+    end
+  end
 end
