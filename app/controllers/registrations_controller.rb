@@ -12,7 +12,7 @@ class RegistrationsController < Devise::RegistrationsController
         render json: { result: 'success_with_notice', notice: "signed_up_but_#{resource.inactive_message}" }
       end
     else
-      render json: { result: 'failed', errors: resource.errors }, status: :unprocessable_entity
+      render json: { result: 'failed', error: resource.errors }, status: :unprocessable_entity
     end
   end
 end
