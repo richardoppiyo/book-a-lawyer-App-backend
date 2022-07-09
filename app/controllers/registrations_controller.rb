@@ -6,7 +6,7 @@ class RegistrationsController < Devise::RegistrationsController
     if resource.persisted?
       if resource.active_for_authentication?
         sign_up(resource_name, resource)
-        render json: { result: 'success' }
+        render json: { result: 'success', user: resource }
       else
         expire_data_after_sign_in!
         render json: { result: 'success_with_notice', notice: "signed_up_but_#{resource.inactive_message}" }
