@@ -6,7 +6,11 @@ class RegistrationsController < Devise::RegistrationsController
     if resource.persisted?
       if resource.active_for_authentication?
         sign_up(resource_name, resource)
-        render json: { result: 'success', user: resource }
+        render json: { result: 'success', user: {
+          **resource.attributes
+            .except('encrypted_password', 'reset_password_token', 'reset_password_sent_at', 'remember_created_at'),
+          avatar: resource.avatar.present? ? url_for(resource.avatar) : nil
+        } }
       else
         expire_data_after_sign_in!
         render json: { result: 'success_with_notice', notice: "signed_up_but_#{resource.inactive_message}" }
@@ -23,7 +27,11 @@ class RegistrationsController < Devise::RegistrationsController
     if resource_updated
       current_user.avatar.purge if account_update_params[:remove_avatar]
 
-      render json: { result: 'success', user: resource }
+      render json: { result: 'success', user: {
+        **resource.attributes
+          .except('encrypted_password', 'reset_password_token', 'reset_password_sent_at', 'remember_created_at'),
+        avatar: resource.avatar.present? ? url_for(resource.avatar) : nil
+      } }
     else
       render json: { result: 'failed', error: resource.errors }, status: :unprocessable_entity
     end
