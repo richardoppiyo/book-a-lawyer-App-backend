@@ -1,4 +1,6 @@
 class Api::V1::LawyersController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     lawyer = Lawyer.all
     render json: { lawyer: }
