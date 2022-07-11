@@ -10,7 +10,9 @@ class User < ApplicationRecord
 
   validates_associated :reservations
   validates :name, presence: true, length: { maximum: 50 }
-  validates :phone, presence: true, length: { maximum: 15 }, numericality: { only_integer: true }
+  validates :phone, presence: true, length: { maximum: 15, minimum: 5 }, format: {
+    with: /\A\+?\d+\z/, message: 'has invalid format'
+  }
   validates :avatar, file_size: { less_than_or_equal_to: 1.megabytes },
                      file_content_type: { allow: ['image/jpeg', 'image/png', 'image/gif'] }
 end
