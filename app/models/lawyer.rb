@@ -1,4 +1,6 @@
 class Lawyer < ApplicationRecord
+  include Rails.application.routes.url_helpers
+
   has_many :reservations, dependent: :destroy
   has_one_attached :avatar
 
@@ -11,4 +13,12 @@ class Lawyer < ApplicationRecord
   validates :bio, :location, :avatar, presence: true
   validates :avatar, file_size: { less_than_or_equal_to: 1.megabytes },
                      file_content_type: { allow: ['image/jpeg', 'image/png', 'image/gif'] }
+
+  def as_json(_)
+    super(methods: :avatar_url)
+  end
+
+  def avatar_url
+    rails_blob_url avatar
+  end
 end
