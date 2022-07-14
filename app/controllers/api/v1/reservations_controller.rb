@@ -1,7 +1,9 @@
 class Api::V1::ReservationsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
-    reservation = Reservation.all
-    render json: { reservation: }
+    reservations = current_user.reservations
+    render json: { reservations: }
   end
 
   def create
