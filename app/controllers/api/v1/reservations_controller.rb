@@ -33,6 +33,6 @@ class Api::V1::ReservationsController < ApplicationController
   private
 
   def reservation_params
-    params.require(:reservation).permit(:reservationdate, :is_active, :duration)
+    params.require(:reservation).permit(:reservationdate, :is_active, :duration, :lawyer_id)
   end
 end
