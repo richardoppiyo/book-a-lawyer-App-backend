@@ -9,25 +9,25 @@ class Api::V1::ReservationsController < ApplicationController
   def create
     reservation = Reservation.new(reservation_params)
     if reservation.save
-      render json: { result: 'Reservation successful' }
+      render json: { result: 'success' }
     else
-      render json: { result: 'Something went wrong' }, status: :unprocessable_entity
+      render json: { result: 'failed', error: reservation.errors }, status: :unprocessable_entity
     end
   end
 
   def update
-    reservation = Reservation.new.find(params[:id])
+    reservation = Reservation.find(params[:id])
     if reservation.update(reservation_params)
-      render json: { result: 'Reservation updated successfully' }
+      render json: { result: 'success' }
     else
-      render json: { result: 'Something went wrong' }, status: :unprocessable_entity
+      render json: { result: 'failed', error: reservation.errors }, status: :unprocessable_entity
     end
   end
 
   def destroy
-    reservation = Reservation.new.find(params[:id])
+    reservation = Reservation.find(params[:id])
     reservation.destroy
-    render json: { result: 'Reservation cancelled successfully' }
+    render json: { result: 'success' }
   end
 
   private
