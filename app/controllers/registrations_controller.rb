@@ -25,7 +25,7 @@ class RegistrationsController < Devise::RegistrationsController
 
     resource_updated = update_resource(resource, account_update_params.except(:remove_avatar))
     if resource_updated
-      current_user.avatar.purge if account_update_params[:remove_avatar]
+      resource.avatar.purge if account_update_params[:remove_avatar] == 'true'
 
       render json: { result: 'success', user: {
         **resource.attributes
