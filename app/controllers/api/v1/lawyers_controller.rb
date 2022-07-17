@@ -1,5 +1,7 @@
 class Api::V1::LawyersController < ApplicationController
   before_action :authenticate_user!
+  authorize_resource
+  skip_authorize_resource only: %i[index show]
 
   def index
     lawyers = Lawyer.all
@@ -16,11 +18,11 @@ class Api::V1::LawyersController < ApplicationController
   end
 
   def update
-    lawyer = current_user.Lawyer.new.find(params[:id])
+    lawyer = Lawyer.find(params[:id])
     if lawyer.update(lawyer_params)
-      render json: { result: 'Lawyer updated successfully' }
+      render json: { result: 'success', lawyer: }
     else
-      render json: { result: 'Something went wrong' }, status: :unprocessable_entity
+      render json: { result: 'failed', error: lawyer.errors }, status: :unprocessable_entity
     end
   end
 
