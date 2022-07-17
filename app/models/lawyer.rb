@@ -15,7 +15,7 @@ class Lawyer < ApplicationRecord
                      file_content_type: { allow: ['image/jpeg', 'image/png', 'image/gif'] }
 
   def as_json(_)
-    super(methods: :avatar_url, except: %i[created_at updated_at])
+    super(methods: :avatar_url)
   end
 
   def avatar_url

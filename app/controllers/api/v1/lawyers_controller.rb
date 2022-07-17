@@ -11,9 +11,9 @@ class Api::V1::LawyersController < ApplicationController
   def create
     lawyer = Lawyer.new(lawyer_params)
     if lawyer.save
-      render json: { result: 'Lawyer created successfully' }
+      render json: { result: 'success', lawyer: }
     else
-      render json: { result: 'Something went wrong' }, status: :unprocessable_entity
+      render json: { result: 'failed', error: lawyer.errors }, status: :unprocessable_entity
     end
   end
 
@@ -34,12 +34,12 @@ class Api::V1::LawyersController < ApplicationController
   def destroy
     lawyer = current_user.Lawyer.new.find(params[:id])
     lawyer.destroy
-    render json: { result: 'Lawyer removed successfully' }
+    render json: { result: 'success' }
   end
 
   private
 
   def lawyer_params
-    params.require(:lawyer).permit(:name, :phone, :email, :location, :rates, :bio)
+    params.require(:lawyer).permit(:name, :phone, :email, :location, :rates, :bio, :avatar, :remove_avatar)
   end
 end
