@@ -30,5 +30,14 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
+
+    return unless user.present?
+
+    if user.admin?
+      can :manage, :all
+    else
+      can :manage, Reservation, user: user
+      can :read, Lawyer
+    end
   end
 end
