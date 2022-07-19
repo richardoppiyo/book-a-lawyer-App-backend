@@ -16,6 +16,8 @@ gem 'bullet', group: 'development'
 
 gem 'devise-jwt'
 
+gem 'aws-sdk-s3', require: false
+
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
 
