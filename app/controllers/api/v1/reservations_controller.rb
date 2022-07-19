@@ -16,16 +16,16 @@ class Api::V1::ReservationsController < ApplicationController
   end
 
   def update
-    reservation = Reservation.find(params[:id])
+    reservation = current_user.reservations.find(params[:id])
     if reservation.update(reservation_params)
-      render json: { result: 'success' }
+      render json: { result: 'success', reservation: }
     else
       render json: { result: 'failed', error: reservation.errors }, status: :unprocessable_entity
     end
   end
 
   def destroy
-    reservation = Reservation.find(params[:id])
+    reservation = current_user.reservations.find(params[:id])
     reservation.destroy
     render json: { result: 'success' }
   end

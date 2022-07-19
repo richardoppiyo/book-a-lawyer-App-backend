@@ -1,5 +1,7 @@
 class Api::V1::LawyersController < ApplicationController
   before_action :authenticate_user!
+  authorize_resource
+  skip_authorize_resource only: %i[index show]
 
   def index
     lawyers = Lawyer.all
@@ -9,18 +11,18 @@ class Api::V1::LawyersController < ApplicationController
   def create
     lawyer = Lawyer.new(lawyer_params)
     if lawyer.save
-      render json: { result: 'Lawyer created successfully' }
+      render json: { result: 'success', lawyer: }
     else
-      render json: { result: 'Something went wrong' }, status: :unprocessable_entity
+      render json: { result: 'failed', error: lawyer.errors }, status: :unprocessable_entity
     end
   end
 
   def update
-    lawyer = current_user.Lawyer.new.find(params[:id])
+    lawyer = Lawyer.find(params[:id])
     if lawyer.update(lawyer_params)
-      render json: { result: 'Lawyer updated successfully' }
+      render json: { result: 'success', lawyer: }
     else
-      render json: { result: 'Something went wrong' }, status: :unprocessable_entity
+      render json: { result: 'failed', error: lawyer.errors }, status: :unprocessable_entity
     end
   end
 
@@ -30,14 +32,14 @@ class Api::V1::LawyersController < ApplicationController
   end
 
   def destroy
-    lawyer = current_user.Lawyer.new.find(params[:id])
+    lawyer = Lawyer.find(params[:id])
     lawyer.destroy
-    render json: { result: 'Lawyer removed successfully' }
+    render json: { result: 'success' }
   end
 
   private
 
   def lawyer_params
-    params.require(:lawyer).permit(:name, :phone, :email, :location, :rates, :bio)
+    params.require(:lawyer).permit(:name, :phone, :email, :location, :rates, :bio, :avatar)
   end
 end

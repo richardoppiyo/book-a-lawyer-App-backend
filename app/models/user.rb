@@ -15,4 +15,8 @@ class User < ApplicationRecord
   }
   validates :avatar, file_size: { less_than_or_equal_to: 1.megabytes },
                      file_content_type: { allow: ['image/jpeg', 'image/png', 'image/gif'] }
+
+  def admin?
+    role == 'admin'
+  end
 end
