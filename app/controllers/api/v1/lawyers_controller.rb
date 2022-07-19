@@ -32,7 +32,7 @@ class Api::V1::LawyersController < ApplicationController
   end
 
   def destroy
-    lawyer = current_user.Lawyer.new.find(params[:id])
+    lawyer = Lawyer.find(params[:id])
     lawyer.destroy
     render json: { result: 'success' }
   end
@@ -40,6 +40,6 @@ class Api::V1::LawyersController < ApplicationController
   private
 
   def lawyer_params
-    params.require(:lawyer).permit(:name, :phone, :email, :location, :rates, :bio, :avatar, :remove_avatar)
+    params.require(:lawyer).permit(:name, :phone, :email, :location, :rates, :bio, :avatar)
   end
 end
