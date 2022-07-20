@@ -2,7 +2,7 @@
 
 # Book a lawyer App
 
-> This repository is a Ruby on Rails developed banckend API only application  named "Book a lawyer App". The purpose of the project is to automate the law services. The Application allows an authenticated user to log in to the system, get a list of all available lawyers whose can be bookeed for a specified amount. The lawyers' bio has the contact details, location, pricing per hour of the lawyer from which a user gets more insights. It also has dedicated pages to see a user's reservations and a reserve form. An admin user has the right to add/remove a lawyer from the database and hence can sees the Manage tab.
+> This repository is a Ruby on Rails developed banckend API only application  named "Book a lawyer App". The purpose of the project is to automate the law services. The Application allows an authenticated user to log in to the system, get a list of all available lawyers whose can be bookeed for a specified amount. The lawyers' bio has the contact details, location, pricing per hour of the lawyer from which a user gets more insights. It also has dedicated pages to see a user's reservations and a reserve form. An admin user has the right to add/remove a lawyer from the database and hence can see the Manage tab.
 
 
 ## Kanban board
@@ -23,13 +23,13 @@
 - PostgreSQL
 - Devise gem, Cancancan gem and JWT gem
 
-## Hosting servies
+## Hosting services
 
 - The project is hosted on Heruku
 - AWS Cloud services is used for hosting the images uploaded to the project.
 
 
-## Configuration adn set up
+## Configuration and set-up
 
 Kindly ensure the following environments have been installed on you system:
 + Node.js
@@ -46,7 +46,7 @@ git clone https://github.com/richardoppiyo/book-a-lawyer-App-backend.git
 
 - Once cloned, navigate to the root directory of the project and run the following coommands:
 
-To install all dependencies
+To install all dependencies:
 
 ```
 bundle install
@@ -58,7 +58,7 @@ To Create the database:
 rails db:create
 ```
 
-Then run migration file to create all the tables
+Then run migration file to create all the tables:
 
 ```
 rails db:migrate
@@ -78,7 +78,7 @@ rails s
 rails s -p 3001
 ```
 
-- Check the localhost with the correct port nummber and endpoint.
+- Check the localhost with the correct port number and endpoint.
 
 
 ## Authors
@@ -110,7 +110,8 @@ Give a ⭐️ if you like this project!
 ## Acknowledgments
 
 - Microverse,
-- 
+- Our coding partners, and
+- Stand-up team members
 
 ## 📝 License
 
