@@ -5,11 +5,9 @@
 > This repository is a Ruby on Rails developed backend API only application  named "Book a lawyer App". The purpose of the project is to automate the law services. The Application allows an authenticated user to log in to the system, get a list of all available lawyers whose can be bookeed for a specified amount. The lawyers' bio has the contact details, location, pricing per hour of the lawyer from which a user gets more insights. It also has dedicated pages to see a user's reservations and a reserve form. An admin user has the right to add/remove a lawyer from the database and hence can see the Manage tab.
 
 
-## ER diagram
+## Entity relationship diagram
 
-- [ER Diagram](https://user-images.githubusercontent.com/35674623/180019287-e06c7c8b-18e0-4033-bace-1848e95196d1.png)
-
-- [Our team consist of 2 members](#authors)
+![Diagram](./book-a-lawyer.png)
 
 # Front End repository
 
@@ -20,57 +18,65 @@
 
 - Ruby version 3.1.2
 - Rails 7.0.3
-- PostgreSQL v 1.1
-- Devise gem, 
-- Cancancan gem 
-- JWT gem
+- PostgreSQL v 14.4
+- Devise
+- Cancancan
+- JWT Auth
 
 ## Hosting services
 
 - The project is hosted on Heruku
-- AWS web service S3 use as a storage service.
+- AWS S3 is used as the production storage service.
 
 
 ## Configuration and set-up
 
-Kindly ensure the following environments have been installed on you system:
-+ Ruby
-+ PostgreSQL
-+ Rails
+- Kindly ensure the following environments have been installed on you system:
+  + Ruby
+  + PostgreSQL
+  + Rails
 
-## Cloning the repository
-- Use this command:
+- Cloning the repository
+  - ```
+    git clone https://github.com/richardoppiyo/book-a-lawyer-App-backend.git
+    ```
 
-```
-git clone https://github.com/richardoppiyo/book-a-lawyer-App-backend.git
-```
+- Navigate to the project's root folder:
+  - ```
+    cd book-a-lawyer-App-backend
+    ```
 
-- Once cloned, navigate to the root directory of the project and run the following commands:
+- Install dependencies:
+  - ```
+    bundle install
+    ```
 
-To install all dependencies:
+- Add the master key to the project:
+  - Create a new file called: `master.key` in `./config` directory
+    - ```
+      touch ./config/master.key
+      ```
+  - Add the development secret key `d6f114bd6f255f293dcf131f49fe7079` on the new created `master.key` file
+    - ```
+      echo "d6f114bd6f255f293dcf131f49fe7079" >> master.key
+      ```
 
-```
-bundle install
-```
+- Create the database:
+  - ```
+    rails db:create
+    ```
 
-To Create the database:
-
-```
-rails db:create
-```
-
-Then run migration file to create all the tables:
-
-```
-rails db:migrate
-```
+- Run migrations:
+  - ```
+    rails db:migrate
+    ```
 
 ## Run the server
 
 - To run the server use the following command (This runs the server on the defualt port: 3000):
 
 ```
-rails s
+rails s --port=3000
 ```
 
 - Check the localhost with the correct port number and endpoint.
