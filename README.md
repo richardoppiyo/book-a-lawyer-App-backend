@@ -2,13 +2,14 @@
 
 # Book a lawyer App
 
-> This repository is a Ruby on Rails developed banckend API only application  named "Book a lawyer App". The purpose of the project is to automate the law services. The Application allows an authenticated user to log in to the system, get a list of all available lawyers whose can be bookeed for a specified amount. The lawyers' bio has the contact details, location, pricing per hour of the lawyer from which a user gets more insights. It also has dedicated pages to see a user's reservations and a reserve form. An admin user has the right to add/remove a lawyer from the database and hence can see the Manage tab.
+> This repository is a Ruby on Rails developed backend API only application  named "Book a lawyer App". The purpose of the project is to automate the law services. The Application allows an authenticated user to log in to the system, get a list of all available lawyers whose can be bookeed for a specified amount. The lawyers' bio has the contact details, location, pricing per hour of the lawyer from which a user gets more insights. It also has dedicated pages to see a user's reservations and a reserve form. An admin user has the right to add/remove a lawyer from the database and hence can see the Manage tab.
 
 
-## Kanban board
+## ER diagram
 
-- [Link to the Initial Backend Kanban board](https://user-images.githubusercontent.com/35674623/177655491-1d75521a-2fe7-4f3d-a65e-2ee081c06da4.png)
-- [Link to the Final Backend Kanban board](https://user-images.githubusercontent.com/35674623/179997012-371b29c5-eba7-4c72-878a-772000ee0f72.png)
+ER Diagram (https://user-images.githubusercontent.com/35674623/180019287-e06c7c8b-18e0-4033-bace-1848e95196d1.png)
+
+
 - [Our team consist of 2 members](#authors)
 
 # Front End repository
@@ -18,22 +19,23 @@
 
 ## Built With
 
-- Ruby
-- Ruby on Rails
-- PostgreSQL
-- Devise gem, Cancancan gem and JWT gem
+- Ruby version 3.1.2
+- Rails 7.0.3
+- PostgreSQL v 1.1
+- Devise gem, 
+- Cancancan gem 
+- JWT gem
 
 ## Hosting services
 
 - The project is hosted on Heruku
-- AWS Cloud services is used for hosting the images uploaded to the project.
+- AWS web service S3 use as a storage service.
 
 
 ## Configuration and set-up
 
 Kindly ensure the following environments have been installed on you system:
-+ Node.js
-+ Ruby version 3.1+
++ Ruby
 + PostgreSQL
 + Rails
 
@@ -44,7 +46,7 @@ Kindly ensure the following environments have been installed on you system:
 git clone https://github.com/richardoppiyo/book-a-lawyer-App-backend.git
 ```
 
-- Once cloned, navigate to the root directory of the project and run the following coommands:
+- Once cloned, navigate to the root directory of the project and run the following commands:
 
 To install all dependencies:
 
@@ -70,12 +72,6 @@ rails db:migrate
 
 ```
 rails s
-```
-
-- To run the server  on a specific port, say 3001, append the port number as follows:
-
-```
-rails s -p 3001
 ```
 
 - Check the localhost with the correct port number and endpoint.
