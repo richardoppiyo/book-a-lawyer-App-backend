@@ -8,8 +8,6 @@
 ## ER diagram
 
 - [ER Diagram](https://user-images.githubusercontent.com/35674623/180019287-e06c7c8b-18e0-4033-bace-1848e95196d1.png)
-- [Link to the Final Backend Kanban board](https://user-images.githubusercontent.com/35674623/179997012-371b29c5-eba7-4c72-878a-772000ee0f72.png)
-
 
 - [Our team consist of 2 members](#authors)
 
