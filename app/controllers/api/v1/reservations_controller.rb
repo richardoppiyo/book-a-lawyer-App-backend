@@ -9,7 +9,7 @@ class Api::V1::ReservationsController < ApplicationController
   def create
     reservation = Reservation.new(user: current_user, **reservation_params)
     if reservation.save
-      render json: { result: 'success' }
+      render json: { result: 'success', reservation: }
     else
       render json: { result: 'failed', error: reservation.errors }, status: :unprocessable_entity
     end

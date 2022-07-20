@@ -71,15 +71,269 @@
     rails db:migrate
     ```
 
-## Run the server
+## Usage
 
-- To run the server use the following command (This runs the server on the defualt port: 3000):
+- Run the server on the specified port:
 
 ```
 rails s --port=3000
 ```
 
-- Check the localhost with the correct port number and endpoint.
+- Available endpoints: Sessions and authentication
+  - `POST /users/sign_in`:
+    - Creates a new user session
+    - Accepts a JSON string or FormData object in this format:
+      ```
+      user: {
+        email: string,
+        password: string,
+      }
+      ```
+    - Responds in JSON:
+      ```
+      {
+        result: 'success',
+        user: user_object,
+      }
+      ```
+    - Returns a JWT auth token in the response's header.
+  - `POST /users`:
+    - Create a new user
+    - Accepts a JSON string or FormData object in this format:
+      ```
+      {
+        user: {
+          name: string
+          email: string,
+          phone: string,
+          password: string,
+          password_confirmation: string,
+          avatar: File image/ jpg, png, gif # optional, only as FormData object
+        },
+      }
+      ```
+    - Responds in JSON:
+      ```
+      {
+        result: 'success',
+        user: user_object,
+      }
+      ```
+    - Returns a JWT auth token in the response's header.
+  - `DELETE /users/sign_out`:
+    - Destroy the user's session
+    - Requires the auth token in the request's header.
+    - Responds in JSON:
+      ```
+      { result: 'success' }
+      ```
+  - `DELETE /users`:
+    - Destroy the user's account
+    - Requires the auth token in the request's header.
+    - Responds in JSON:
+      ```
+      { result: 'success' }
+      ```
+  - `PATCH /users`:
+    - Updates the user's account
+    - Requires the auth token in the request's header.
+    - Accepts a JSON string or FormData object in this format:
+      ```
+      {
+        user: {
+          name: string
+          email: string,
+          phone: string,
+          password: string,
+          password_confirmation: string,
+          avatar: File: image/jpg, png, gif # optional, only as FormData object
+        },
+      }
+      ```
+    - Responds in JSON:
+      ```
+      {
+        result: 'success',
+        user: user_object,
+      }
+      ```
+- Available endpoints: Lawyers
+  - `GET /api/v1/lawyers`:
+    - Return the list of lawyers:
+    - Requires the auth token in the request's header.
+    - Return a JSON string in this format:
+      ```
+      {
+        lawyers: [
+          {
+            "id": int,
+            "name": string,
+            "phone": string,
+            "email": string,
+            "location": string,
+            "rates": number,
+            "bio": string,
+            "created_at": datetime_string,
+            "updated_at": datetime_string,
+            "avatar_url": string,
+          },
+          ...
+        ]
+      }
+      ```
+  - `GET /api/v1/lawyers/:id`:
+    - Returns a specific lawyer:
+    - Requires the auth token in the request's header.
+    - Return a JSON string in this format:
+      ```
+      {
+        lawyer: {
+          "id": int,
+          "name": string,
+          "phone": string,
+          "email": string,
+          "location": string,
+          "rates": number,
+          "bio": string,
+          "created_at": datetime_string,
+          "updated_at": datetime_string,
+          "avatar_url": string,
+        }
+      }
+      ```
+  - `[admin] POST /api/v1/lawyers`:
+    - Creates a new lawyer
+    - Requires the auth token in the request's header.
+    - Accepts a FormData object in this format:
+      ```
+      {
+        lawyer: {
+          id: int,
+          name: string,
+          phone: string,
+          email: string,
+          location: string,
+          rates: number,
+          bio: string,
+          created_at: datetime_string,
+          updated_at: datetime_string,
+          avatar: File image/ jpg, png, gif,
+        }
+      }
+      ```
+    - Responds in JSON:
+      ```
+      {
+        result: 'success',
+        lawyer: lawyer_object,
+      }
+      ```
+  - `[admin] DELETE /api/v1/lawyers/:id`:
+    - Destroys a lawyer item
+    - Requires the auth token in the request's header.
+    - Responds in JSON:
+      ```
+      { result: 'success' }
+      ```
+  - `[admin] PATCH /api/v1/lawyers/:id`:
+    - Updates  a lawyer
+    - Requires the auth token in the request's header.
+    - Accepts a FormData object in this format:
+      ```
+      {
+        lawyer: {
+          id: int,
+          name: string,
+          phone: string,
+          email: string,
+          location: string,
+          rates: number,
+          bio: string,
+          created_at: datetime_string,
+          updated_at: datetime_string,
+          avatar: File image/ jpg, png, gif,
+        }
+      }
+      ```
+    - Responds in JSON:
+      ```
+      {
+        result: 'success',
+        lawyer: lawyer_object,
+      }
+      ```
+- Available endpoints: Reservations
+  - `GET /api/v1/reservations`:
+    - Returns a list of reservations for the signed in user
+    - Requires the auth token in the request's header.
+    - Return a JSON string in this format:
+      ```
+      {
+        "reservations": [
+          {
+              "id": number,
+              "reservationdate": datetime_string,
+              "is_active": boolean,
+              "duration": number,
+              "created_at": datetime_string,
+              "updated_at": datetime_string,
+              "user_id": number,
+              "lawyer_id": number,
+          },
+          ...
+        ]
+      }
+      ```
+  - `POST /api/v1/reservations`:
+    - Creates a reservations for the signed in user
+    - Requires the auth token in the request's header.
+    - Accepts a JSON object in this format:
+      ```
+      {
+        reservation: {
+          id: int,
+          reservationdate: date,
+          is_active: bolean,
+          duration: int,
+          lawyer_id: int,
+        }
+      }
+      ```
+    - Responds in JSON:
+      ```
+      {
+        result: 'success',
+        reservation: reservation_object,
+      }
+      ```
+  - `DELETE /api/v1/lawyers/:id`:
+    - Destroys a reservation for the signed in user 
+    - Requires the auth token in the request's header.
+    - Responds in JSON:
+      ```
+      { result: 'success' }
+      ```
+  - `PATCH  /api/v1/lawyers/:id`:
+    - Updates a reservation for the signed in user
+    - Requires the auth token in the request's header.
+    - Accepts a JSON object in this format:
+      ```
+      {
+        reservation: {
+          id: int,
+          reservationdate: date,
+          is_active: bolean,
+          duration: int,
+          lawyer_id: int,
+        }
+      }
+      ```
+    - Responds in JSON:
+      ```
+      {
+        result: 'success',
+        reservation: reservation_object,
+      }
 
 
 ## Authors
