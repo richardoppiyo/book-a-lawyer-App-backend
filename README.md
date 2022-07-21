@@ -9,9 +9,16 @@
 
 ![Diagram](./book-a-lawyer.png)
 
-# Front End repository
+## Front End repository
 
 [Link to the front end repository](https://github.com/helio3197/book-a-lawyer-App-frontend)
+
+## Kanban board
+
+- [Link to the Kanban board](https://github.com/richardoppiyo/book-a-lawyer-App-backend/projects/1)
+- [Initial Kanban board screenshot](https://user-images.githubusercontent.com/35674623/177655491-1d75521a-2fe7-4f3d-a65e-2ee081c06da4.png)
+- [Final Kanban board screenshot](https://user-images.githubusercontent.com/35674623/179997012-371b29c5-eba7-4c72-878a-772000ee0f72.png)
+- [Our team consist of 2 members](#authors)
 
 
 ## Built With
@@ -26,6 +33,9 @@
 ## Hosting services
 
 - The project is hosted on Heruku
+```
+https://book-a-lawyer-backend.herokuapp.com/
+```
 - AWS S3 is used as the production storage service.
 
 
@@ -77,6 +87,11 @@
 
 ```
 rails s --port=3000
+```
+
+- Or use the deployed API server:
+```
+https://book-a-lawyer-backend.herokuapp.com/
 ```
 
 - Available endpoints: Sessions and authentication
